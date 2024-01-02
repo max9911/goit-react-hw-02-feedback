@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Section } from './section/section';
 import Feedback from './feedback/feedback';
 import Stats from './stats/stats';
 
@@ -10,25 +11,24 @@ class App extends Component {
   };
 
   oneClick = evt => {
-    evt.target.id === '1' &&
-      this.setState(prev => ({
-        good: prev.good + 1,
-      }));
-    evt.target.id === '2' &&
-      this.setState(prev => ({
-        neutral: prev.neutral + 1,
-      }));
-    evt.target.id === '3' &&
-      this.setState(prev => ({
-        bad: prev.bad + 1,
-      }));
+    const id = evt.target.id;
+    this.setState(prev => ({
+      [id]: prev[id] + 1,
+    }));
   };
 
   render() {
     return (
       <>
-        <Feedback oneClick={this.oneClick} />
-        <Stats data={this.state} />
+        <Section title="Please leave feedback">
+          <Feedback
+            oneClick={this.oneClick}
+            options={Object.keys(this.state)}
+          />
+        </Section>
+        <Section title="Statistics">
+          <Stats data={this.state} />
+        </Section>
       </>
     );
   }

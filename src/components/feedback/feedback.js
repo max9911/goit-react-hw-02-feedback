@@ -1,20 +1,13 @@
 import css from './feedback.module.css';
 
-const Feedback = ({ oneClick }) => {
+const Feedback = ({ oneClick, options }) => {
   return (
-    <div className={css.container}>
-      <h2>Please leave feedback </h2>
-      <div className={css.btnList}>
-        <button id="1" className={css.btn} onClick={oneClick}>
-          Good
+    <div className={css.btnList}>
+      {options.map(elm => (
+        <button key={elm} id={elm} className={css.btn} onClick={oneClick}>
+          {elm}
         </button>
-        <button id="2" className={css.btn} onClick={oneClick}>
-          Neutral
-        </button>
-        <button id="3" className={css.btn} onClick={oneClick}>
-          Bad
-        </button>
-      </div>
+      ))}
     </div>
   );
 };
